@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,7 @@
 	<%@ include file="header.jsp"%>
 	<main role="main" class="container">
 	<div class="jumbotron">
-		<h1>Navbar example</h1>
+		<h1>Navbar example ${sessionScope.username}</h1>
 		<p class="lead">This example is a quick exercise to illustrate how
 			fixed to top navbar works. As you scroll, it will remain fixed to the
 			top of your browser’s viewport.</p>
