@@ -1,0 +1,3 @@
+tripId,fromCity,toCity,busType,totalSeats,availSeats,departureDate,departureTime
+BLW1001,Bangalore,Mumbai,AC Sleeper,30,30,29-04-2020,18:30
+BLW1002,Mumbai,Pune,AC Semi Sleeper,35,35,21-05-2020,11:20
