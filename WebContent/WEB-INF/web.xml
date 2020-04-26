@@ -5,4 +5,8 @@
 	id="WebApp_ID" version="4.0">
 	<display-name>blue-whale-bus-service</display-name>
 
+	<context-param>
+		<param-name>schemaCreate</param-name>
+		<param-value>Yes</param-value>
+	</context-param>
 </web-app>

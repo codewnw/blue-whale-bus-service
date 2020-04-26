@@ -8,6 +8,8 @@ import com.bluewhale.bus.model.Login;
 
 public class LoginDaoImpl implements LoginDao {
 
+	private static final String CREATE_TABLE = "CREATE TABLE LOGIN (USERNAME VARCHAR(256) PRIMARY KEY, PASSWORD VARCHAR(256), TYPE VARCHAR(128), STATUS VARCHAR(128))";
+	private static final String DROP_TABLE = "DROP TABLE LOGIN";
 	private static final String QUERY = "SELECT * FROM LOGIN WHERE USERNAME = ? AND PASSWORD = ?";
 	private static final String INSERT_QUERY = "INSERT INTO LOGIN VALUES(?, ?, ?, ?)";
 	private static final String UPDATE_QUERY = "UPDATE LOGIN SET STATUS = ? WHERE USERNAME = ?";
@@ -62,6 +64,37 @@ public class LoginDaoImpl implements LoginDao {
 	public void delete(String username) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void createTable() {
+		System.out.println(this.getClass().getSimpleName() + " createTable");
+		try (Connection conn = DbUtil.getCon(); PreparedStatement pstmt = conn.prepareStatement(CREATE_TABLE);) {
+			pstmt.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void insertBaseData() {
+		System.out.println(this.getClass().getSimpleName() + " insertBaseData");
+		Login login = new Login();
+		login.setUnsername("admin");
+		login.setPassword("admin");
+		login.setType("admin");
+		login.setStatus("Verified");
+		create(login);
+	}
+
+	@Override
+	public void dropTable() {
+		System.out.println(this.getClass().getSimpleName() + " dropTable");
+		try (Connection conn = DbUtil.getCon(); PreparedStatement pstmt = conn.prepareStatement(DROP_TABLE);) {
+			pstmt.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

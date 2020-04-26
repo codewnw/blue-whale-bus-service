@@ -1,6 +1,6 @@
 package com.bluewhale.bus.dao;
 
-public interface UserVerficationDao {
+public interface UserVerficationDao extends BaseDao {
 	String create(String username);
 
 	boolean verify(String username, String otp);

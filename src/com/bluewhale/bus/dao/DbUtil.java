@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class DbUtil {
+public class DbUtil implements BaseDao {
 
 	public static Connection connection;
 
@@ -26,5 +26,41 @@ public class DbUtil {
 			connection = DriverManager.getConnection(url, username, password);
 		}
 		return connection;
+	}
+
+	@Override
+	public void createTable() {
+		LoginDao loginDao = new LoginDaoImpl();
+		loginDao.createTable();
+
+		UserDao userDao = new UserDaoImpl();
+		userDao.createTable();
+
+		UserVerficationDao userVerficationDao = new UserVerficationDaoImpl();
+		userVerficationDao.createTable();
+	}
+
+	@Override
+	public void insertBaseData() {
+		LoginDao loginDao = new LoginDaoImpl();
+		loginDao.insertBaseData();
+
+		UserDao userDao = new UserDaoImpl();
+		userDao.insertBaseData();
+
+		UserVerficationDao userVerficationDao = new UserVerficationDaoImpl();
+		userVerficationDao.insertBaseData();
+	}
+
+	@Override
+	public void dropTable() {
+		LoginDao loginDao = new LoginDaoImpl();
+		loginDao.dropTable();
+
+		UserDao userDao = new UserDaoImpl();
+		userDao.dropTable();
+
+		UserVerficationDao userVerficationDao = new UserVerficationDaoImpl();
+		userVerficationDao.dropTable();
 	}
 }

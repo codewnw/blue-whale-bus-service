@@ -2,7 +2,7 @@ package com.bluewhale.bus.dao;
 
 import com.bluewhale.bus.model.Login;
 
-public interface LoginDao {
+public interface LoginDao extends BaseDao {
 
 	void create(Login login);
 
