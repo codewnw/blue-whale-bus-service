@@ -6,15 +6,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.bluewhale.bus.dao.DbUtil;
+
 public class DbWriter {
+	static String QUERY = "INSERT INTO BUS_SCHEDULE VALUES(?,?,?,?,?,?,?,?)";
 
-	static void writeToDb(List<String[]> allData) {
+	public static void writeToDb(List<String[]> allData) {
 
-		try {
-			Connection conn = DbUtil.getDbConnection();
-
-			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO BUS_SCHEDULE VALUES(?,?,?,?,?,?,?,?)");
-
+		try (Connection conn = DbUtil.getCon(); PreparedStatement pstmt = conn.prepareStatement(QUERY);) {
 			allData.remove(0);
 
 			Set<String[]> dataSet = new HashSet<String[]>(allData);
@@ -36,9 +35,9 @@ public class DbWriter {
 					System.out.println("Records Inserted Successfully");
 				}
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 }

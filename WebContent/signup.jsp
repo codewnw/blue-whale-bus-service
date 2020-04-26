@@ -21,6 +21,16 @@
       <input type="password" name="password" class="form-control" id="inputPassword4">
     </div>
   </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">First Name</label>
+      <input type="text" name="firstName" class="form-control" id="inputEmail4">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Last Name</label>
+      <input type="text" name="lastName" class="form-control" id="inputPassword4">
+    </div>
+  </div>
   <div class="form-group">
     <label for="inputAddress">Address</label>
     <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">

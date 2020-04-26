@@ -1,7 +1,6 @@
 package com.bluewhale.bus.servlet;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,11 +8,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bluewhale.bus.model.Login;
+import com.bluewhale.bus.model.User;
+import com.bluewhale.bus.service.LoginService;
+import com.bluewhale.bus.service.LoginServiceImpl;
+import com.bluewhale.bus.service.MailService;
+import com.bluewhale.bus.service.UserService;
+import com.bluewhale.bus.service.UserServiceImpl;
+
 @WebServlet("/signup")
 public class Signup extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private MailService mailService;
+
+	private LoginService loginService;
+
+	private UserService userService;
+
 	public Signup() {
+		userService = new UserServiceImpl();
+		loginService = new LoginServiceImpl();
+		mailService = new MailService();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -24,10 +40,25 @@ public class Signup extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String username = request.getParameter("email");
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
 		String password = request.getParameter("password");
 
-		Map<String, String> users = LoginServlet.users;
-		users.put(username, password);
+		User user = new User();
+		user.setUsername(username);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		userService.create(user);
+
+		mailService.send(username);
+
+		Login login = new Login();
+		login.setUnsername(username);
+		login.setPassword(password);
+		login.setType("Customer");
+		login.setStatus("Not Verified");
+		loginService.create(login);
+
 		response.sendRedirect("index.jsp");
 	}
 

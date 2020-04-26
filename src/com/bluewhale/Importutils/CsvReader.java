@@ -22,21 +22,9 @@ public class CsvReader {
 	String[] expectedHeader = { "tripId", "fromCity", "toCity", "busType", "totalSeats", "availSeats", "departureDate",
 			"departureTime" };
 
-	boolean validateHeader(List<String> actualHeader, List<String> expectedHeader) {
-
-		if (actualHeader.equals(expectedHeader)) {
-
-			return true;
-		}
-		return false;
-
-	}
-
-	List<String[]> readData(String file) {
+	public List<String[]> readData(String file) {
 		try {
 
-			// Create an object of file reader
-			// class with CSV file as a parameter.
 			FileReader filereader = new FileReader(file);
 
 			CSVReader csvReader = new CSVReaderBuilder(filereader).build();
@@ -64,6 +52,16 @@ public class CsvReader {
 		}
 
 		return allData;
+	}
+
+	boolean validateHeader(List<String> actualHeader, List<String> expectedHeader) {
+
+		if (actualHeader.equals(expectedHeader)) {
+
+			return true;
+		}
+		return false;
+
 	}
 
 }

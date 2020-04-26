@@ -10,6 +10,7 @@
 <body>
 	<%@ include file="header.jsp"%>
 	<main role="main" class="container">
+	<p>${param.msg eq null ? '' :  param.msg}</p>
 	<div class="jumbotron">
 		<h1>Navbar example ${sessionScope.username}</h1>
 		<p class="lead">This example is a quick exercise to illustrate how
