@@ -1,10 +1,10 @@
-package com.bus.ticketing.dao.properties;
+package com.bluewhale.bus.dao;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import com.bus.ticketing.dao.exception.DAOConfigurationException;
+import com.bluewhale.bus.exception.DAOConfigurationException;
 
 public class DAOProperties {
 	

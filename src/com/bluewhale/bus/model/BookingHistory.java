@@ -1,6 +1,6 @@
-package com.bus.ticketing.dao.model;
+package com.bluewhale.bus.model;
 
-import com.bus.ticketing.model.Booking;
+import com.bluewhale.bus.model.Booking;
 
 public class BookingHistory {
 

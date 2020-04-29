@@ -1,4 +1,4 @@
-package com.bus.ticketing.dao.exception;
+package com.bluewhale.bus.exception;
 
 public class DAOException extends RuntimeException {
 

@@ -1,4 +1,4 @@
-package com.bluewhale.bus.ticketing.model.copy;
+package com.bluewhale.bus.model;
 
 public class Booking {
 

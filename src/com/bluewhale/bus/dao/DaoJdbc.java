@@ -1,15 +1,16 @@
-package com.bus.ticketing.dao;
+package com.bluewhale.bus.dao;
 
 import java.util.List;
 
-import com.bus.ticketing.dao.exception.DAOException;
-import com.bus.ticketing.dao.model.BookingHistory;
-import com.bus.ticketing.model.Booking;
-import com.bus.ticketing.model.Customer;
+import com.bluewhale.bus.exception.DAOException;
+import com.bluewhale.bus.model.Booking;
+import com.bluewhale.bus.model.BookingHistory;
+import com.bluewhale.bus.model.Customer;
+import com.bluewhale.bus.model.User;
 
 public interface DaoJdbc {
 
-	public void create(Customer customer) throws IllegalArgumentException, DAOException;
+	public void create(User user) throws IllegalArgumentException, DAOException;
 	
 	public boolean find(String username, String password) throws DAOException;
 	
