@@ -11,15 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.bus.ticketing.dao.DaoJdbc;
-import com.bus.ticketing.dao.DaoJdbcImpl;
-import com.bus.ticketing.dao.model.BookingHistory;
-import com.bus.ticketing.model.Customer;
+import com.bluewhale.bus.dao.DaoJdbcImpl;
+import com.bluewhale.bus.model.BookingHistory;
+import com.bluewhale.bus.model.Customer;
 
 @WebServlet("/booking-history")
 public class BookingHistoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private DaoJdbc daoJdbc=null;
+	private com.bluewhale.bus.dao.DaoJdbc daoJdbc=null;
 	
     public BookingHistoryServlet() {
         super();

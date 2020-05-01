@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.bluewhale.bus.ticketing.dao.DaoJdbc;
-import com.bluewhale.bus.ticketing.dao.DaoJdbcImpl;
-import com.bluewhale.bus.ticketing.model.Booking;
-import com.bluewhale.bus.ticketing.model.Customer;
+import com.bluewhale.bus.dao.DaoJdbc;
+import com.bluewhale.bus.dao.DaoJdbcImpl;
+import com.bluewhale.bus.model.Booking;
+import com.bluewhale.bus.model.Customer;
 
 @WebServlet("/book-seat")
 public class SeatBookingServlet extends HttpServlet {
@@ -24,7 +24,7 @@ public class SeatBookingServlet extends HttpServlet {
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		daoJdbc=new DaoJdbcImpl();
+		daoJdbc = new DaoJdbcImpl();
 		System.out.println("Seat Booking Servlet");
 		Booking booking=(Booking) request.getAttribute("bookSeat");
 		booking.setBookingStatus("SUCCESS");

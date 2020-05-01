@@ -9,15 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bus.ticketing.dao.DaoJdbc;
-import com.bus.ticketing.dao.DaoJdbcImpl;
-import com.bus.ticketing.model.Customer;
+import com.bluewhale.bus.dao.DaoJdbc;
+import com.bluewhale.bus.dao.DaoJdbcImpl;
+import com.bluewhale.bus.model.Customer;
+import com.bluewhale.bus.model.User;
 
 @WebServlet("/sign-up")
 public class SignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private DaoJdbc daoJdbc=new DaoJdbcImpl();
+	private DaoJdbc daoJdbc;
 	public SignUpServlet() {
         super();
     }
@@ -25,10 +26,10 @@ public class SignUpServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		System.out.println("Sign Up Servlet");
-		Customer customer=(Customer) request.getAttribute("cust");
-		System.out.println(customer);
-		//System.out.println(request.getParameter("msg"));
-		daoJdbc.create(customer);
+		daoJdbc=new DaoJdbcImpl();
+		User user=(User) request.getAttribute("cust");
+		System.out.println(user);
+		daoJdbc.create(user);
 		RequestDispatcher rd = request.getRequestDispatcher("jsp/SignUpSuccessful.jsp");
 		rd.forward(request, response);
 		
