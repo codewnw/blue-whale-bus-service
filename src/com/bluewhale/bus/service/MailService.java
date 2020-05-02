@@ -16,17 +16,27 @@ public class MailService {
 
 	private UserVerficationService userVerficationService;
 
+	private String fromAddress;
+
+	private String userName;
+
+	private String password;
+
+	private String subject;
+
+	private String body;
+
 	public MailService() {
 		userVerficationService = new UserVerficationServiceImpl();
+		ResourceBundle resourceBundle = ResourceBundle.getBundle("email", Locale.US);
+		this.fromAddress = resourceBundle.getString("fromAddress");
+		this.userName = resourceBundle.getString("username");
+		this.password = resourceBundle.getString("password");
+		this.subject = resourceBundle.getString("subject");
+		this.body = resourceBundle.getString("body");
 	}
 
-	public void send(String toAddr) {
-		ResourceBundle rb = ResourceBundle.getBundle("email", Locale.US);
-		final String userName = rb.getString("username");
-		final String password = rb.getString("password");
-		String fromAddr = rb.getString("from");
-		String subject = rb.getString("subject");
-		String text = rb.getString("text");
+	public void send(String toAddress) {
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -42,14 +52,14 @@ public class MailService {
 
 		try {
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(fromAddr));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toAddr));
-			message.setSubject(subject);
-			message.setText(text + " " + userVerficationService.create(toAddr));
+			message.setFrom(new InternetAddress(fromAddress));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toAddress));
+			message.setSubject(subject + " Verify your email address");
+			message.setText(body + "Your email varification OTP: " + userVerficationService.create(toAddress));
 
+			System.out.println("----\nSending email...");
 			Transport.send(message);
-
-			System.out.println("Sent!");
+			System.out.println("Email sent!!!\n----");
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
