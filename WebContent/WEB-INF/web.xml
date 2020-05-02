@@ -7,6 +7,6 @@
 
 	<context-param>
 		<param-name>schemaCreate</param-name>
-		<param-value>Yes</param-value>
+		<param-value>No</param-value>
 	</context-param>
 </web-app>
