@@ -26,7 +26,7 @@ public class MailService {
 		final String password = rb.getString("password");
 		String fromAddr = rb.getString("from");
 		String subject = rb.getString("subject");
-		String text = rb.getString("text");
+		String body = rb.getString("body");
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -44,12 +44,12 @@ public class MailService {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(fromAddr));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toAddr));
-			message.setSubject(subject);
-			message.setText(text + " " + userVerficationService.create(toAddr));
+			message.setSubject(subject + " Verify your email address");
+			message.setText(body + "Your email varification OTP: " + userVerficationService.create(toAddr));
 
+			System.out.println("----\nSending email...");
 			Transport.send(message);
-
-			System.out.println("Sent!");
+			System.out.println("Email sent!!!\n----");
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
