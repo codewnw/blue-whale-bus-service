@@ -34,11 +34,11 @@ public class SeatBookingServlet extends HttpServlet {
 		boolean isSeatBooked=daoJdbc.bookSeat(booking, customer.getcId());
 		if(isSeatBooked) {
 			request.setAttribute("bookSeat", booking);
-			RequestDispatcher rd = request.getRequestDispatcher("jsp/SeatBookingSuccessful.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("BookingDetails.jsp");
 			rd.forward(request, response);
 		}
 		else
-			response.sendRedirect("jsp/bookSeat.jsp");
+			response.sendRedirect("bookSeat.jsp");
 		
 	}
 
