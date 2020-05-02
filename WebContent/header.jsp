@@ -11,9 +11,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="resources/navbar-top-fixed.css" />
-<link rel="stylesheet" href="resources/navbar.css" />
-<link rel="stylesheet" href="resources/sticky-footer.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/navbar-top-fixed.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/navbar.css" />
 <title>Insert title here</title>
 </head>
 <body>
@@ -32,7 +31,7 @@
 					<li class="nav-item active"><a class="nav-link" href="#">Book
 							<span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/buses.jsp">Buses</a></li>
 					<li class="nav-item"><a class="nav-link disabled" href="#"
 						tabindex="-1" aria-disabled="true">Disabled</a></li>
 					<c:if test="${sessionScope.username eq null}">
