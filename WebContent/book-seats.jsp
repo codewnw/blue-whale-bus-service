@@ -75,10 +75,13 @@ th, td {
 							align="right" "width="400" height="350"></td>
 					</tr>
 				</table>
-				<br> <input type="submit"
-					style="color: white; background-color: green" "width="150"
-					height="50">
+
+				<div>
+					<input type="submit" class="btn btn-primary btn-block zoom"
+						height="50">
+				</div>
 			</form>
+
 			<br>
 		</div>
 	</main>
