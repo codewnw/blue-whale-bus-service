@@ -3,6 +3,7 @@
 	<%@ page isELIgnored="false"%>
 <%@ page session="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +32,7 @@
 					<li class="nav-item active"><a class="nav-link" href="#">Book
 							<span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/buses.jsp">Buses</a></li>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/buses/all">Buses</a></li>
 					<li class="nav-item"><a class="nav-link disabled" href="#"
 						tabindex="-1" aria-disabled="true">Disabled</a></li>
 					<c:if test="${sessionScope.username eq null}">

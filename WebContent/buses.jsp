@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ page import="java.time.*"%>
 <!DOCTYPE html>
 <html>
 <head>
 <style type="text/css">
 .bus-div {
-
 	margin: 4px;
 	border: 1px solid grey;
 	border-radius: 5px;
@@ -14,8 +13,8 @@
 	height: 130px;
 }
 
-.bus-div:hover{
-background-color: #a8dadc;
+.bus-div:hover {
+	background-color: #a8dadc;
 }
 
 .bus-div-sec-1 {
@@ -46,10 +45,13 @@ background-color: #a8dadc;
 	height: 100%;
 }
 
-.zoom{
+.zoom {
+	
 }
+
 .zoom:hover {
-  transform: scale(1.05); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+	transform: scale(1.05);
+	/* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 </style>
 <meta charset="ISO-8859-1">
@@ -58,29 +60,33 @@ background-color: #a8dadc;
 <body>
 	<%@ include file="header.jsp"%>
 	<div class="container">
-		<c:forEach var="count" begin="0" end="5">
+		<c:forEach var="bus" items="${sessionScope.buses}">
 			<div class="bus-div">
 				<div class="bus-div-sec-1">
 					<div style="float: none;">
 						<img align="middle" alt=""
-							src="${pageContext.request.contextPath}/resources/images/volvo.png"
+							src="${pageContext.request.contextPath}/resources/images/${fn:toLowerCase(bus.type)}.png"
 							width="100%" height="100">
 					</div>
 					<div style="float: none;">
-						<p style="text-align: center;">Volvo</p>
+						<p style="text-align: center;">${bus.type}</p>
 					</div>
 
 				</div>
 				<div class="bus-div-sec-2">
 					<div align="center">
-						<span style="font-size: x-large;"><strong>10:20</strong></span> <span
-							style="font-size: medium;">AM</span>
+						<c:set var="depTimeArr"
+							value="${fn:split(bus.departureTime, ' ')}" />
+						<c:set var="depTime" value="${depTimeArr[0]}" />
+						<c:set var="depAmPm" value="${depTimeArr[1]}" />
+						<span style="font-size: x-large;"><strong>${depTime}</strong></span>
+						<span style="font-size: medium;">${depAmPm}</span>
 					</div>
 					<div align="center">
-						<span style="font-size: large;">Bangalore</span>
+						<span style="font-size: large;">${bus.origin}</span>
 					</div>
 					<div style="margin-top: 5px" align="center">
-						<span style="font-size: large;">2020-05-02</span>
+						<span style="font-size: large;">${bus.departureDate}</span>
 					</div>
 				</div>
 				<div class="bus-div-sec-3">
@@ -93,12 +99,12 @@ background-color: #a8dadc;
 
 						<div style="float: left; width: 50%;">
 							<div style="float: none;" align="center">
-							<span style="font-size: x-large;"><strong>20</strong></span>
-							<span
-							style="font-size: large;">Hours</span>
+								<span style="font-size: x-large;"><strong>${bus.travelTime}</strong></span> <span
+									style="font-size: large;">Hours</span>
 							</div>
 							<div style="float: none; margin-top: 10px;" align="center">
-							<span>-------------------------</span></div>
+								<span>-------------------------</span>
+							</div>
 						</div>
 
 
@@ -107,26 +113,35 @@ background-color: #a8dadc;
 								src="${pageContext.request.contextPath}/resources/images/source-to-destination.png"
 								width="60" height="60">
 						</div>
-						<div style="float: left; width:100%; padding: 2px; padding-top: 4px;">AC | Charger | Water Bottle | WiFi | Blanket</div>
+						<div
+							style="float: left; width: 100%; padding: 2px; padding-top: 4px;">
+							<c:forEach var="amenity" items="${bus.amenities}">
+							${amenity }&nbsp;|&nbsp;
+							</c:forEach>
+						</div>
 					</div>
 
 				</div>
 				<div class="bus-div-sec-2">
 					<div align="center">
-						<span style="font-size: x-large;"><strong>12:20</strong></span> <span
-							style="font-size: medium;">PM</span>
+						<c:set var="arrivalTimeArr"
+							value="${fn:split(bus.arrivalTime, ' ')}" />
+						<c:set var="arrivalTime" value="${arrivalTimeArr[0]}" />
+						<c:set var="arrivalAmPm" value="${arrivalTimeArr[1]}" />
+						<span style="font-size: x-large;"><strong>${arrivalTime}</strong></span>
+						<span style="font-size: medium;">${arrivalAmPm}</span>
 					</div>
 					<div align="center">
-						<span style="font-size: large;">Delhi</span>
+						<span style="font-size: large;">${bus.destination}</span>
 					</div>
 					<div style="margin-top: 5px" align="center">
-						<span style="font-size: large;">2020-05-03</span>
+						<span style="font-size: large;">${bus.arrivalDate}</span>
 					</div>
 				</div>
 				<div class="bus-div-sec-4">
 					<div align="center" style="margin-bottom: 6px">
 						<span style="font-size: large;">&#8377;</span> <span
-							style="font-size: x-large;"><strong>1500</strong></span>
+							style="font-size: x-large;"><strong>${bus.fare}</strong></span>
 					</div>
 					<div align="center" style="margin: 1px">
 						<span style="font-size: large;"><button type="button"
@@ -134,7 +149,8 @@ background-color: #a8dadc;
 					</div>
 					<div align="center" style="margin: 1px">
 						<span style="font-size: large;"><a type="button"
-								class="btn btn-primary btn-block zoom" href="${pageContext.request.contextPath}/buses/1/temp">Book</a></span>
+							class="btn btn-primary btn-block zoom"
+							href="${pageContext.request.contextPath}/buses/${bus.id}/info">Book</a></span>
 					</div>
 				</div>
 			</div>

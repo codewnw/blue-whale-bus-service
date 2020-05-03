@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.bluewhale.Importutils.CsvReader;
 import com.bluewhale.Importutils.DbWriter;
 import com.bluewhale.bus.model.Bus;
+import com.bluewhale.bus.util.MockDataUtil;
 
 @WebServlet(urlPatterns = { "/buses/*" })
 public class BusServlet extends HttpServlet {
@@ -28,7 +29,7 @@ public class BusServlet extends HttpServlet {
 		System.out.println(uri);
 		if (uri.contains("upload-schedule-form")) {
 			response.sendRedirect("../upload-schedule-form.jsp");
-		} else if (uri.contains("temp")) {
+		} else if (uri.contains("info")) {
 			HttpSession session = request.getSession(false);
 			Bus bus = new Bus();
 			for (int i = 1; i < 21; i++) {
@@ -36,6 +37,11 @@ public class BusServlet extends HttpServlet {
 			}
 			session.setAttribute("bus", bus);
 			response.sendRedirect("../../book-seats.jsp");
+		} else if (uri.contains("all")) {
+			List<Bus> buses = MockDataUtil.getBuses();
+			HttpSession session = request.getSession(false);
+			session.setAttribute("buses", buses);
+			response.sendRedirect("../buses.jsp");
 		} else {
 			response.sendRedirect("../index.jsp");
 		}
