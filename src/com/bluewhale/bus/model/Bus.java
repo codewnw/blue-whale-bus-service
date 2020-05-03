@@ -7,14 +7,6 @@ import java.util.List;
 
 public class Bus {
 
-	@Override
-	public String toString() {
-		return "Bus [id=" + id + ", type=" + type + ", departureTime=" + departureTime + ", origin=" + origin
-				+ ", departureDate=" + departureDate + ", arrivalTime=" + arrivalTime + ", destination=" + destination
-				+ ", arrivalDate=" + arrivalDate + ", fare=" + fare + ", travelTime=" + travelTime + ", amenities="
-				+ amenities + ", seats=" + seats + "]";
-	}
-
 	private String id;
 
 	private String type;
@@ -141,4 +133,11 @@ public class Bus {
 		this.seats = seats;
 	}
 
+	@Override
+	public String toString() {
+		return "Bus [id=" + id + ", type=" + type + ", departureTime=" + departureTime + ", origin=" + origin
+				+ ", departureDate=" + departureDate + ", arrivalTime=" + arrivalTime + ", destination=" + destination
+				+ ", arrivalDate=" + arrivalDate + ", fare=" + fare + ", travelTime=" + travelTime + ", amenities="
+				+ amenities + ", seats=" + seats + "]";
+	}
 }
