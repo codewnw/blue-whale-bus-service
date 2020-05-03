@@ -71,7 +71,7 @@ th, td {
 							</table>
 						</td>
 						<td><img
-							src="${pageContext.request.contextPath}/resources/images/volvobus.jpg"
+							src="${pageContext.request.contextPath}/resources/images/scania.png"
 							align="right" "width="400" height="350"></td>
 					</tr>
 				</table>
