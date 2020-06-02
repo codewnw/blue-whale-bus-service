@@ -12,10 +12,8 @@
 	<main role="main" class="container">
 	<p>${param.msg eq null ? '' :  param.msg}</p>
 	<div class="jumbotron">
-		<h1>Navbar example ${sessionScope.username}</h1>
-		<p class="lead">This example is a quick exercise to illustrate how
-			fixed to top navbar works. As you scroll, it will remain fixed to the
-			top of your browser’s viewport.</p>
+		<h1>BlueWhale - Travel on Safer Wheels ${sessionScope.username}</h1>
+		<p class="lead">India's largest Bus Operator !!!</p>
 		<a class="btn btn-lg btn-primary"
 			href="{{ site.baseurl }}/docs/{{ site.docs_version }}/components/navbar/"
 			role="button">View navbar docs &raquo;</a>
