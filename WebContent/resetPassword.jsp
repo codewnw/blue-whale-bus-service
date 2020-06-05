@@ -21,18 +21,17 @@ th, td {
 			<p class="lead">Check your registered mail for OTP...</p>
 		</div>
 
-		<form method="post"
-			action="${pageContext.request.contextPath}/resetPassword">
+		<form method="post" action="${pageContext.request.contextPath}/resetpassword">
 
 			<div>
 				<label for="exampleInputPassword1">Email ID:</label> <input
-					type="text" name="emailId" class="form-control"
-					id="exampleInputPassword1">
+					type="text" name="emailId" value=${emailId } readonly
+					class="form-control" id="exampleInputPassword1">
 			</div>
 
 			<div>
 				<label for="exampleInputPassword1">OTP:</label> <input type="text"
-					name="OTP" class="form-control" id="exampleInputPassword1">
+					name="otp" class="form-control" id="exampleInputPassword1">
 			</div>
 
 			<div>

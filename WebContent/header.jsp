@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@ page isELIgnored="false"%>
+<%@ page isELIgnored="false"%>
 <%@ page session="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +12,10 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/navbar-top-fixed.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/navbar.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/navbar-top-fixed.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/navbar.css" />
 <title>Insert title here</title>
 </head>
 <body>
@@ -32,9 +34,9 @@
 					<li class="nav-item active"><a class="nav-link" href="#">Book
 							<span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/buses/all">Buses</a></li>
-					<li class="nav-item"><a class="nav-link disabled" href="#"
-						tabindex="-1" aria-disabled="true">Disabled</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="${pageContext.request.contextPath}/buses/all">Buses</a></li>
+
 					<c:if test="${sessionScope.username eq null}">
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#" id="dropdown07XL"
@@ -49,10 +51,10 @@
 					<c:if test="${sessionScope.username ne null}">
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#" id="dropdown07XL"
-							data-toggle="dropdown" aria-expanded="false">Welcome, ${sessionScope.username}</a>
+							data-toggle="dropdown" aria-expanded="false">Welcome,
+								${sessionScope.username}</a>
 							<div class="dropdown-menu" aria-labelledby="dropdown07XL">
-								 <a
-									class="dropdown-item"
+								<a class="dropdown-item"
 									href="${pageContext.request.contextPath}/logout">Logout</a>
 							</div></li>
 					</c:if>

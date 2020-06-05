@@ -10,15 +10,21 @@
 <body>
 	<%@ include file="header.jsp"%>
 	<main role="main" class="container">
-	<p>${param.msg eq null ? '' :  param.msg}</p>
-	<div class="jumbotron">
-		<h1>BlueWhale - Travel on Safer Wheels ${sessionScope.username}</h1>
-		<p class="lead">India's largest Bus Operator !!!</p>
-		<a class="btn btn-lg btn-primary"
-			href="{{ site.baseurl }}/docs/{{ site.docs_version }}/components/navbar/"
-			role="button">View navbar docs &raquo;</a>
-	</div>
+		<p>${param.msg eq null ? '' :  param.msg}</p>
+		<div class="jumbotron">
+			<h1>BlueWhale - Travel on Safer Wheels ${sessionScope.username}</h1>
+			<p class="lead">India's largest Bus Operator !!!</p>
+			<a class="btn btn-lg btn-primary"
+				href="{{ site.baseurl }}/docs/{{ site.docs_version }}/components/navbar/"
+				role="button">View navbar docs &raquo;</a>
+		</div>
+		<img
+			src="${pageContext.request.contextPath}/resources/images/scania.png"
+			align="middle" width="600" height="350">
+
 	</main>
+
+
 	<%@ include file="footer.jsp"%>
 </body>
 </html>
