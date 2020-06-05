@@ -43,7 +43,8 @@ public class MailService {
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "25");
+		props.put("mail.smtp.port", "587");
+		// Previously it was 25
 
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -56,7 +57,7 @@ public class MailService {
 			message.setFrom(new InternetAddress(fromAddress));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toAddress));
 			message.setSubject(subject + " Verify your email address");
-			message.setText(body + "Your email varification OTP: " + userVerficationService.create(toAddress));
+			message.setText(body + "Your email verification OTP: " + userVerficationService.create(toAddress));
 
 			System.out.println("----\nSending email...");
 			Transport.send(message);
