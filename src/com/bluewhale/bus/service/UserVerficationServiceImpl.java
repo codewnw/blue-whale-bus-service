@@ -22,8 +22,26 @@ public class UserVerficationServiceImpl implements UserVerficationService {
 	}
 
 	@Override
+	public boolean resetPassword(String username, String password) {
+		return userVerficationDao.resetPassword(username, password);
+	}
+
+	@Override
 	public void delete(String username) {
 		userVerficationDao.delete(username);
+	}
+
+	@Override
+	public boolean forgotPassword(String username) {
+
+		boolean userExists = userVerficationDao.isUserAlreadyCreated(username);
+		if (!userExists) {
+			return false;
+		}
+		new MailService().send(username);
+		System.out.println("OTP Sent to email");
+		return true;
+
 	}
 
 }

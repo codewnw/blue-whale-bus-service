@@ -6,4 +6,9 @@ public interface UserVerficationService {
 	boolean verify(String username, String otp);
 
 	void delete(String username);
+
+	boolean forgotPassword(String username);
+
+	boolean resetPassword(String username, String password);
+
 }

@@ -10,6 +10,8 @@ public class UserVerficationDaoImpl implements UserVerficationDao {
 	private static final String INSERT_QUERY = "INSERT INTO OTP VALUES (?, ?)";
 	private static final String VERIFY_QUERY = "SELECT * FROM OTP WHERE USERNAME = ? AND OTP = ?";
 	private static final String DELETE_QUERY = "DELETE FROM OTP WHERE USERNAME  = ?";
+	private static final String EXISTS_QUERY = "SELECT * FROM USER WHERE USERNAME  = ?";
+	private static final String PASSWDUPDATE_QUERY = "UPDATE LOGIN SET PASSWORD = ? WHERE USERNAME = ?";
 
 	@Override
 	public String create(String username) {
@@ -32,6 +34,32 @@ public class UserVerficationDaoImpl implements UserVerficationDao {
 			pstmt.setString(2, otp);
 			ResultSet rs = pstmt.executeQuery();
 			return rs.next();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean resetPassword(String username, String password) {
+		try (Connection con = DbUtil.getCon(); PreparedStatement pstmt = con.prepareStatement(PASSWDUPDATE_QUERY)) {
+			pstmt.setString(1, password);
+			pstmt.setString(2, username);
+			int rs = pstmt.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isUserAlreadyCreated(String username) {
+		try (Connection con = DbUtil.getCon(); PreparedStatement pstmt = con.prepareStatement(EXISTS_QUERY)) {
+			pstmt.setString(1, username);
+			ResultSet rs = pstmt.executeQuery();
+			return rs.next();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
