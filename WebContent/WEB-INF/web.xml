@@ -9,4 +9,8 @@
 		<param-name>schemaCreate</param-name>
 		<param-value>No</param-value>
 	</context-param>
+
+	<error-page>
+		<location>/index.jsp</location>
+	</error-page>
 </web-app>
