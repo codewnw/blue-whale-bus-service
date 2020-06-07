@@ -37,18 +37,18 @@ CREATE TABLE otp (
     otp VARCHAR(10) NOT NULL
 );
 
-Create Table `Booking` (
-`booking_id` int(11) NOT NULL auto_increment,
-`booking_status` varchar(10) NOT NULL,
-`Bus_no` varchar(11) NOT NULL,
-`Seat_no` int(5),
-`Price` varchar(10),
-`Booking_date` date DEFAULT NULL,
-`From_Place` varchar(10) DEFAULT NULL,
-`To_Place` varchar(10) DEFAULT NULL,
-`Travel_Date` date NOT NULL,
-`Payment_mode` varchar(15),
-`customer_id` int(11),
+Create Table Booking (
+booking_id int(11) auto_increment,
+booking_status varchar(256) ,
+Bus_no varchar(256) ,
+Seat_no varchar(256),
+Price varchar(256),
+Payment_mode varchar(256),
+username varchar(256),
+Booking_date date,
+From_Place varchar(256),
+To_Place varchar(256),
+Travel_Date date,
 PRIMARY KEY (booking_id),
-FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
+FOREIGN KEY (username) REFERENCES user(username)
 );
