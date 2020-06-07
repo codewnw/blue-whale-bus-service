@@ -14,10 +14,9 @@ public interface DaoJdbc {
 	
 	public boolean find(String username, String password) throws DAOException;
 	
-	public boolean bookSeat(Booking booking, int customerId) throws DAOException;
-	
 	public Customer findCustomer(String username) throws DAOException;
 	
 	public List<BookingHistory> findBookingHistoryByCustomer(int custId) throws DAOException;
+
 	
 }

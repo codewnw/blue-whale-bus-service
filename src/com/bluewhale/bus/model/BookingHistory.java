@@ -1,13 +1,11 @@
 package com.bluewhale.bus.model;
 
-import com.bluewhale.bus.model.Booking;
-
 public class BookingHistory {
 
 	private int bookingId;
 	private String travelDate;
 	private String busId;
-	private int seatNo;
+	private String seatNo;
 	private String bookingStatus;	
 	
 	public String getBookingStatus() {
@@ -34,11 +32,16 @@ public class BookingHistory {
 	public void setBusId(String busId) {
 		this.busId = busId;
 	}
-	public int getSeatNo() {
+	public String getSeatNo() {
 		return seatNo;
 	}
-	public void setSeatNo(int seatNo) {
-		this.seatNo = seatNo;
+	public void setSeatNo(String string) {
+		this.seatNo = string;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "BookingHistory [bookingId=" + bookingId + ", travelDate=" + travelDate + ", busId=" + busId
+				+ ", seatNo=" + seatNo + ", bookingStatus=" + bookingStatus + "]";
+	}
 }
