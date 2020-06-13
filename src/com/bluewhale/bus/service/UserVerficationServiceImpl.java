@@ -1,5 +1,7 @@
 package com.bluewhale.bus.service;
 
+import javax.management.RuntimeErrorException;
+
 import com.bluewhale.bus.dao.UserVerficationDao;
 import com.bluewhale.bus.dao.UserVerficationDaoImpl;
 
@@ -22,8 +24,26 @@ public class UserVerficationServiceImpl implements UserVerficationService {
 	}
 
 	@Override
+	public boolean resetPassword(String username, String password) {
+		return userVerficationDao.resetPassword(username, password);
+	}
+
+	@Override
 	public void delete(String username) {
 		userVerficationDao.delete(username);
+	}
+
+	@Override
+	public boolean forgotPassword(String username) {
+
+		boolean userExists = userVerficationDao.isExistingUser(username);
+		if (!userExists) {
+			throw new RuntimeException("User does not exists");
+		}
+		new MailService().send(username);
+		System.out.println("OTP Sent to email");
+		return true;
+
 	}
 
 }
