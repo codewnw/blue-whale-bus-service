@@ -54,7 +54,7 @@ public class UserVerficationDaoImpl implements UserVerficationDao {
 	}
 
 	@Override
-	public boolean isUserAlreadyCreated(String username) {
+	public boolean isExistingUser(String username) {
 		try (Connection con = DbUtil.getCon(); PreparedStatement pstmt = con.prepareStatement(EXISTS_QUERY)) {
 			pstmt.setString(1, username);
 			ResultSet rs = pstmt.executeQuery();

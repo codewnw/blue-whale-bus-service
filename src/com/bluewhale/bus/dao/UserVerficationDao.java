@@ -8,7 +8,7 @@ public interface UserVerficationDao extends BaseDao {
 
 	void delete(String username);
 
-	boolean isUserAlreadyCreated(String username);
+	boolean isExistingUser(String username);
 
 	boolean resetPassword(String username, String password);
 

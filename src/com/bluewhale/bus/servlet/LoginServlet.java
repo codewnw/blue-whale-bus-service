@@ -15,7 +15,7 @@ import com.bluewhale.bus.service.LoginServiceImpl;
 import com.bluewhale.bus.service.UserVerficationService;
 import com.bluewhale.bus.service.UserVerficationServiceImpl;
 
-@WebServlet(urlPatterns = { "/login", "/verify" })
+@WebServlet(urlPatterns = { "/login", "/verify", "/forgot", "/resetpassword" })
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -30,7 +30,13 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.sendRedirect("login.jsp");
+
+		String uri = request.getRequestURI();
+		if (uri.contains("forgot")) {
+			response.sendRedirect("forgot.jsp");
+		} else {
+			response.sendRedirect("login.jsp");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -47,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 			} else if (status.equals("Not Verified")) {
 				response.sendRedirect("verify.jsp");
 			} else if (status.equals("Blocked"))
-				response.sendRedirect("index.jsp?msg=Your account has been bloacked. Please contact Admin.");
+				response.sendRedirect("index.jsp?msg=Your account has been blocked. Please contact Admin.");
 			else {
 				response.sendRedirect("login.jsp");
 			}
@@ -62,11 +68,43 @@ public class LoginServlet extends HttpServlet {
 				loginService.update(login);
 				userVerficationService.delete(username);
 			}
-			response.sendRedirect("index.jsp?msg=Verification successfull!");
+
+			response.sendRedirect("index.jsp?msg=Verification Successfull !");
+
+		} else if (uri.contains("forgot")) {
+
+			System.out.println("Forgot Password Servlet");
+			String username = (String) request.getParameter("emailId");
+			userVerficationService = new UserVerficationServiceImpl();
+			if (userVerficationService.forgotPassword(username)) {
+
+				// If User Exists then send Redirect
+				request.setAttribute("emailId", username);
+				request.getRequestDispatcher("reset-password.jsp").forward(request, response);
+			}
+
+		} else if (uri.contains("resetpassword")) {
+
+			System.out.println("Reset Password Section");
+
+			String username = (String) request.getParameter("emailId");
+			String password = (String) request.getParameter("password");
+			String otp = (String) request.getParameter("otp");
+
+			userVerficationService = new UserVerficationServiceImpl();
+
+			if (userVerficationService.verify(username, otp)) {
+				System.out.println(" OTP Verification Successful ");
+				userVerficationService.resetPassword(username, password);
+				userVerficationService.delete(username);
+				response.sendRedirect("login.jsp");
+
+			} else {
+				throw new RuntimeException("OTP Does not match");
+			}
+
 		} else {
 			response.sendRedirect("index.jsp");
 		}
-
 	}
-
 }
