@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.bluewhale.Importutils.CsvReader;
 import com.bluewhale.Importutils.DbWriter;
 import com.bluewhale.bus.model.Bus;
@@ -17,6 +20,9 @@ import com.bluewhale.bus.util.MockDataUtil;
 
 @WebServlet(urlPatterns = { "/buses/*" })
 public class BusServlet extends HttpServlet {
+
+	private static final Logger logger = LoggerFactory.getLogger(BusServlet.class);
+
 	private static final long serialVersionUID = 1L;
 
 	public BusServlet() {
@@ -25,7 +31,11 @@ public class BusServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		logger.debug("Inside Class :" + this.getClass().getSimpleName());
+
 		String uri = request.getRequestURI();
+
 		System.out.println(uri);
 		if (uri.contains("upload-schedule-form")) {
 			response.sendRedirect("../upload-schedule-form.jsp");
@@ -50,6 +60,9 @@ public class BusServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		logger.debug("Inside Class :" + this.getClass().getSimpleName());
+
 		String uri = request.getRequestURI();
 
 		if (uri.contains("upload-schedule")) {

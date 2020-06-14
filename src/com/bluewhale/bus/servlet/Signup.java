@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.bluewhale.bus.model.Login;
 import com.bluewhale.bus.model.User;
 import com.bluewhale.bus.service.LoginService;
@@ -18,6 +21,8 @@ import com.bluewhale.bus.service.UserServiceImpl;
 
 @WebServlet("/signup")
 public class Signup extends HttpServlet {
+
+	private static final Logger logger = LoggerFactory.getLogger(Signup.class);
 	private static final long serialVersionUID = 1L;
 
 	private MailService mailService;
@@ -34,11 +39,17 @@ public class Signup extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		logger.debug("Inside Class :" + this.getClass().getSimpleName());
+
 		response.sendRedirect("signup.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		logger.debug("Inside Class :" + this.getClass().getSimpleName());
+
 		String username = request.getParameter("email");
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");

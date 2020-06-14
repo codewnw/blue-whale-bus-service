@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.bluewhale.bus.exception.UserNotFoundException;
 import com.bluewhale.bus.model.Login;
 import com.bluewhale.bus.service.LoginService;
 import com.bluewhale.bus.service.LoginServiceImpl;
@@ -17,6 +21,9 @@ import com.bluewhale.bus.service.UserVerficationServiceImpl;
 
 @WebServlet(urlPatterns = { "/login", "/verify", "/forgot", "/resetpassword" })
 public class LoginServlet extends HttpServlet {
+
+	private static final Logger logger = LoggerFactory.getLogger(LoginServlet.class);
+
 	private static final long serialVersionUID = 1L;
 
 	private LoginService loginService;
@@ -31,16 +38,23 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		logger.debug("Inside Class :" + this.getClass().getSimpleName());
+
 		String uri = request.getRequestURI();
 		if (uri.contains("forgot")) {
+
 			response.sendRedirect("forgot.jsp");
 		} else {
 			response.sendRedirect("login.jsp");
+
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		logger.debug("Inside Class :" + this.getClass().getSimpleName());
+		
 		String uri = request.getRequestURI();
 		if (uri.contains("login")) {
 			String username = request.getParameter("email");
@@ -87,9 +101,9 @@ public class LoginServlet extends HttpServlet {
 
 			System.out.println("Reset Password Section");
 
-			String username = (String) request.getParameter("emailId");
-			String password = (String) request.getParameter("password");
-			String otp = (String) request.getParameter("otp");
+			String username = request.getParameter("emailId");
+			String password = request.getParameter("password");
+			String otp = request.getParameter("otp");
 
 			userVerficationService = new UserVerficationServiceImpl();
 
@@ -100,7 +114,7 @@ public class LoginServlet extends HttpServlet {
 				response.sendRedirect("login.jsp");
 
 			} else {
-				throw new RuntimeException("OTP Does not match");
+				throw new UserNotFoundException("OTP Does not match");
 			}
 
 		} else {
