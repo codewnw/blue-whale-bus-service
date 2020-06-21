@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.bluewhale.bus.model.Login;
+import com.bluewhale.bus.model.Password;
 import com.bluewhale.bus.service.LoginService;
 import com.bluewhale.bus.service.LoginServiceImpl;
 import com.bluewhale.bus.service.UserVerficationService;
@@ -45,7 +46,10 @@ public class LoginServlet extends HttpServlet {
 		if (uri.contains("login")) {
 			String username = request.getParameter("email");
 			String password = request.getParameter("password");
-			String status = loginService.checkStatus(username, password);
+			Login login = new Login();
+			login.setUnsername(username);
+			login.setPassword(new Password(password));
+			String status = loginService.checkStatus(login);
 			if (status.equals("Verified")) {
 				HttpSession session = request.getSession(true);
 				session.setAttribute("username", username);

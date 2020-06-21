@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.bluewhale.bus.model.Login;
+import com.bluewhale.bus.model.Password;
 
 public class LoginDaoImpl implements LoginDao {
 
@@ -15,11 +16,11 @@ public class LoginDaoImpl implements LoginDao {
 	private static final String UPDATE_QUERY = "UPDATE LOGIN SET STATUS = ? WHERE USERNAME = ?";
 
 	@Override
-	public String checkStatus(String unsername, String password) {
+	public String checkStatus(Login login) {
 		String status = null;
 		try (Connection conn = DbUtil.getCon(); PreparedStatement pstmt = conn.prepareStatement(QUERY);) {
-			pstmt.setString(1, unsername);
-			pstmt.setString(2, password);
+			pstmt.setString(1, login.getUnsername());
+			pstmt.setString(2, login.getPassword().getSecuredPassword());
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
 				status = rs.getString("STATUS");
@@ -34,7 +35,7 @@ public class LoginDaoImpl implements LoginDao {
 	public void create(Login login) {
 		try (Connection conn = DbUtil.getCon(); PreparedStatement pstmt = conn.prepareStatement(INSERT_QUERY);) {
 			pstmt.setString(1, login.getUnsername());
-			pstmt.setString(2, login.getPassword());
+			pstmt.setString(2, login.getPassword().getSecuredPassword());
 			pstmt.setString(3, login.getType());
 			pstmt.setString(4, login.getStatus());
 			pstmt.executeUpdate();
@@ -81,7 +82,7 @@ public class LoginDaoImpl implements LoginDao {
 		System.out.println(this.getClass().getSimpleName() + " insertBaseData");
 		Login login = new Login();
 		login.setUnsername("admin");
-		login.setPassword("admin");
+		login.setPassword(new Password("admin"));
 		login.setType("admin");
 		login.setStatus("Verified");
 		create(login);

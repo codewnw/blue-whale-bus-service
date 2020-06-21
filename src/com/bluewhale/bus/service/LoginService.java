@@ -11,5 +11,5 @@ public interface LoginService {
 
 	void delete(String username);
 
-	String checkStatus(String unsername, String password);
+	String checkStatus(Login login);
 }
