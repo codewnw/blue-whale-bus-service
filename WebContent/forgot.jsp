@@ -32,6 +32,8 @@ th, td {
 			<br>
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
+		<br>
+		<button type=button name="back" class="btn btn-primary" onclick="history.back()">Back</button>
 
 
 	</main>

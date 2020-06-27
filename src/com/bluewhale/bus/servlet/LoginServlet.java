@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.bluewhale.bus.model.Login;
 import com.bluewhale.bus.model.Password;
 import com.bluewhale.bus.service.LoginService;
@@ -46,6 +48,8 @@ public class LoginServlet extends HttpServlet {
 		if (uri.contains("login")) {
 			String username = request.getParameter("email");
 			String password = request.getParameter("password");
+			String firstName = request.getParameter("firstName");
+			String lastName = request.getParameter("lastName");
 			Login login = new Login();
 			login.setUnsername(username);
 			login.setPassword(new Password(password));
@@ -53,6 +57,12 @@ public class LoginServlet extends HttpServlet {
 			if (status.equals("Verified")) {
 				HttpSession session = request.getSession(true);
 				session.setAttribute("username", username);
+				if(StringUtils.isNotBlank(firstName)) {
+					session.setAttribute("firstName", firstName);
+				}
+				if(StringUtils.isNotBlank(lastName)) {
+					session.setAttribute("lastName", lastName);
+				}
 				response.sendRedirect("profile.jsp");
 			} else if (status.equals("Not Verified")) {
 				response.sendRedirect("verify.jsp");
@@ -95,13 +105,16 @@ public class LoginServlet extends HttpServlet {
 			String password = (String) request.getParameter("password");
 			String otp = (String) request.getParameter("otp");
 
+			Password changedPassword=new Password(password);
 			userVerficationService = new UserVerficationServiceImpl();
 
 			if (userVerficationService.verify(username, otp)) {
 				System.out.println(" OTP Verification Successful ");
-				userVerficationService.resetPassword(username, password);
+				userVerficationService.resetPassword(username, changedPassword.getSecuredPassword());
 				userVerficationService.delete(username);
-				response.sendRedirect("login.jsp");
+				String passwordResetString="Password Reset is Successful. Login to continue !";
+				request.setAttribute("resetPasswordSuccessfulMsg", passwordResetString);
+				request.getRequestDispatcher("login.jsp").forward(request, response);;
 
 			} else {
 				throw new RuntimeException("OTP Does not match");
