@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.bluewhale.bus.model.Login;
+import com.bluewhale.bus.model.Password;
 import com.bluewhale.bus.model.User;
 import com.bluewhale.bus.service.LoginService;
 import com.bluewhale.bus.service.LoginServiceImpl;
@@ -65,7 +66,7 @@ public class Signup extends HttpServlet {
 
 		Login login = new Login();
 		login.setUnsername(username);
-		login.setPassword(password);
+		login.setPassword(new Password(password));
 		login.setType("Customer");
 		login.setStatus("Not Verified");
 		loginService.create(login);

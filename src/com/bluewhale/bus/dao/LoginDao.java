@@ -12,5 +12,5 @@ public interface LoginDao extends BaseDao {
 
 	void delete(String username);
 
-	String checkStatus(String unsername, String password);
+	String checkStatus(Login login);
 }

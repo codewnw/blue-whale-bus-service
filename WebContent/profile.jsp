@@ -13,7 +13,7 @@
 	<h2>Welcome, ${sessionScope.username}</h2>
 
 	<ul>
-		<li><a href="jsp/bookSeat.jsp">Book your Seat</a></li>
+		<li><a href="bookSeat.jsp">Book your Seat</a></li>
 	</ul>
 
 	<table style="background-color: #ffffcc;">
@@ -23,7 +23,7 @@
 			</td>
          </tr>
          <tr>
-         	<td align="center"><a href="jsp/process-bookings-history.jsp">
+         	<td align="center"><a href="process-bookings-history.jsp">
             	<font size="4" color="blue">click here</font></a>
             </td>
 		</tr>

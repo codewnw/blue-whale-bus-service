@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import com.bluewhale.bus.exception.UserNotFoundException;
 import com.bluewhale.bus.model.Login;
+import com.bluewhale.bus.model.Password;
 import com.bluewhale.bus.service.LoginService;
 import com.bluewhale.bus.service.LoginServiceImpl;
 import com.bluewhale.bus.service.UserVerficationService;
@@ -47,6 +48,7 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			response.sendRedirect("login.jsp");
 
+
 		}
 	}
 
@@ -59,7 +61,10 @@ public class LoginServlet extends HttpServlet {
 		if (uri.contains("login")) {
 			String username = request.getParameter("email");
 			String password = request.getParameter("password");
-			String status = loginService.checkStatus(username, password);
+			Login login = new Login();
+			login.setUnsername(username);
+			login.setPassword(new Password(password));
+			String status = loginService.checkStatus(login);
 			if (status.equals("Verified")) {
 				HttpSession session = request.getSession(true);
 				session.setAttribute("username", username);
@@ -101,9 +106,11 @@ public class LoginServlet extends HttpServlet {
 
 			System.out.println("Reset Password Section");
 
-			String username = request.getParameter("emailId");
-			String password = request.getParameter("password");
-			String otp = request.getParameter("otp");
+
+			String username = (String) request.getParameter("emailId");
+			String password = (String) request.getParameter("password");
+			String otp = (String) request.getParameter("otp");
+
 
 			userVerficationService = new UserVerficationServiceImpl();
 
@@ -115,6 +122,7 @@ public class LoginServlet extends HttpServlet {
 
 			} else {
 				throw new UserNotFoundException("OTP Does not match");
+
 			}
 
 		} else {

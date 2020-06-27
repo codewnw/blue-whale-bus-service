@@ -33,8 +33,8 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public String checkStatus(String unsername, String password) {
-		return loginDao.checkStatus(unsername, password);
+	public String checkStatus(Login login) {
+		return loginDao.checkStatus(login);
 	}
 
 }

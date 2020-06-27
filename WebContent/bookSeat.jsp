@@ -25,12 +25,12 @@ table, th, td {
 			<tr>
 				<td><label>From Place:</label></td>
 				<td><input type="text" name="fromPlace"
-					placeholder="Enter Start Place of Journey"></td>
+					placeholder="Enter Start Place"></td>
 			</tr>
 			<tr>
 				<td><label>To Place:</label></td>
 				<td><input type="text" name="toPlace"
-					placeholder="Enter End Place of Journey"></td>
+					placeholder="Enter Destination"></td>
 			</tr>
 			<tr>
 				<td><label>Select Bus:</label></td>

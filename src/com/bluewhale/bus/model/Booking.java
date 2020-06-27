@@ -3,9 +3,9 @@ package com.bluewhale.bus.model;
 public class Booking {
 
 	private long bId;
-	private long userId;
+	private String userId;
 	private String busId;
-	private int seatNo;
+	private String seatNo;
 	private String fromPlace;
 	private String toPlace;
 	private String travelDate;
@@ -28,10 +28,10 @@ public class Booking {
 	public void setbId(long bId) {
 		this.bId = bId;
 	}
-	public long getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public String getBusId() {
@@ -40,10 +40,10 @@ public class Booking {
 	public void setBusId(String busId) {
 		this.busId = busId;
 	}
-	public int getSeatNo() {
+	public String getSeatNo() {
 		return seatNo;
 	}
-	public void setSeatNo(int seatNo) {
+	public void setSeatNo(String seatNo) {
 		this.seatNo = seatNo;
 	}
 	public String getBookingStatus() {

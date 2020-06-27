@@ -4,7 +4,7 @@ public class Login {
 
 	private String unsername;
 
-	private String password;
+	private Password password;
 
 	private String type;
 
@@ -18,11 +18,11 @@ public class Login {
 		this.unsername = unsername;
 	}
 
-	public String getPassword() {
+	public Password getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(Password password) {
 		this.password = password;
 	}
 
