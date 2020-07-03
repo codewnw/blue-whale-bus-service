@@ -9,6 +9,9 @@
 <body>
 	<%@ include file="header.jsp"%>
 	<main role="main" class="container">
+		<div class="jumbotron">
+			<h4>${requestScope.resetPasswordSuccessfulMsg}</h4>
+		</div>
 		<form method="post" action="${pageContext.request.contextPath}/login">
 			<div class="form-group">
 				<label for="exampleInputEmail1">Email address</label> <input

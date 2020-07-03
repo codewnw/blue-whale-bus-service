@@ -56,6 +56,8 @@
 							<div class="dropdown-menu" aria-labelledby="dropdown07XL">
 								<a class="dropdown-item"
 									href="${pageContext.request.contextPath}/logout">Logout</a>
+								<a class="dropdown-item"
+									href="${pageContext.request.contextPath}/profile.jsp">My Profile</a>
 							</div></li>
 					</c:if>
 

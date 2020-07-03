@@ -4,7 +4,11 @@
 <%@ page session="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="listSize" scope="session" value="${bookingHistList.size()}"/>
-<h4>Booking History for ${sessionScope.username}</h4>
+<jsp:include page="header.jsp" />
+<main role="main" class="container">
+<div class="jumbotron">
+<p class="lead">Booking History for ${sessionScope.username}</p>
+</div>
 
 <hr>
 <br>
@@ -35,3 +39,5 @@
 </c:if>
 <br><br>
 <button type=button name="back" onclick="history.back()">Go Back</button>
+</main>
+<jsp:include page="footer.jsp" />

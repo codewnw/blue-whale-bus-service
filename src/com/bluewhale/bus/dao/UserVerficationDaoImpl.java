@@ -3,6 +3,8 @@ package com.bluewhale.bus.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 public class UserVerficationDaoImpl implements UserVerficationDao {
 	private static final String CREATE_TABLE = "CREATE TABLE OTP (username VARCHAR(256) PRIMARY KEY, OTP VARCHAR(10))";
@@ -12,6 +14,7 @@ public class UserVerficationDaoImpl implements UserVerficationDao {
 	private static final String DELETE_QUERY = "DELETE FROM OTP WHERE USERNAME  = ?";
 	private static final String EXISTS_QUERY = "SELECT * FROM USER WHERE USERNAME  = ?";
 	private static final String PASSWDUPDATE_QUERY = "UPDATE LOGIN SET PASSWORD = ? WHERE USERNAME = ?";
+	private static final String UPDATE_OTP_QUERY = "UPDATE OTP SET OTP=? WHERE USERNAME=?";
 
 	@Override
 	public String create(String username) {
@@ -21,7 +24,19 @@ public class UserVerficationDaoImpl implements UserVerficationDao {
 			otp = (int) (Math.random() * 10000) + "";
 			pstmt.setString(2, otp);
 			pstmt.executeUpdate();
-		} catch (Exception e) {
+		} catch(SQLIntegrityConstraintViolationException sqlIntegrityConstraintViolationException) {
+			// Got duplicate key exception when the otp already existed for the user in db
+			try (Connection con = DbUtil.getCon(); PreparedStatement pstmt = con.prepareStatement(UPDATE_OTP_QUERY)){
+				pstmt.setString(1, otp);
+				pstmt.setString(2, username);
+				con.prepareStatement(UPDATE_OTP_QUERY);
+				pstmt.executeUpdate();
+				System.out.println("updated OTP for existing user");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 		return otp;
