@@ -12,4 +12,6 @@ public interface UserVerficationDao extends BaseDao {
 
 	boolean resetPassword(String username, String password);
 
+	boolean verifyOldPassword(String username, String oldPassword);
+
 }

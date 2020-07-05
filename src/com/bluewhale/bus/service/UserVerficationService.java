@@ -11,4 +11,8 @@ public interface UserVerficationService {
 
 	boolean resetPassword(String username, String password);
 
+	boolean verifyOldPassword(String username, String oldPassword);
+
+	boolean isExistingUser(String username);
+
 }

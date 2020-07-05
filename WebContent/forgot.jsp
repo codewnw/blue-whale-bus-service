@@ -18,8 +18,8 @@ th, td {
 		<p>${param.msg eq null ? '' :  param.msg}</p>
 		<div class="jumbotron">
 			<h1>Forgot Password?</h1>
-			<p class="lead">Please provide details below to Reset Password
-				...</p>
+			<p class="lead"> ${ param.errorMessage eq null ? 'Please provide details below to Reset Password....' : '' }</p>
+			<p class="lead" style="color:red;">${param.errorMessage}</p>
 		</div>
 
 		<form method="post" action="${pageContext.request.contextPath}/forgot">
