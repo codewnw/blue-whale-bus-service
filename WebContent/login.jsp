@@ -25,7 +25,7 @@
 					type="password" name="password" class="form-control"
 					id="exampleInputPassword1">
 			</div>
-
+			<p style="color:red;">${param.errorMessage}</p>
 			<button type="submit" class="btn btn-primary">Submit</button>
 
 			<div>

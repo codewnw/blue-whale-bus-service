@@ -37,13 +37,20 @@ public class UserVerficationServiceImpl implements UserVerficationService {
 	public boolean forgotPassword(String username) {
 
 		boolean userExists = userVerficationDao.isExistingUser(username);
-		if (!userExists) {
-			throw new RuntimeException("User does not exists");
-		}
-		new MailService().send(username);
-		System.out.println("OTP Sent to email");
-		return true;
-
+//		if (!userExists) {
+//			throw new RuntimeException("User does not exists");
+//		}
+		return userExists;
 	}
+
+	@Override
+	public boolean verifyOldPassword(String username, String oldPassword) {
+		return userVerficationDao.verifyOldPassword(username, oldPassword);
+	}
+
+	@Override
+	public boolean isExistingUser(String username) {
+		return userVerficationDao.isExistingUser(username);
+	}	
 
 }
