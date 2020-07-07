@@ -15,28 +15,29 @@ th, td {
 <body>
 	<%@ include file="header.jsp"%>
 	<main role="main" class="container">
-		<p>${param.msg eq null ? '' :  param.msg}</p>
+<%-- 		<p>${param.msg eq null ? '' :  param.msg}</p> --%>
 		<div class="jumbotron">
 			<h1>Reset Password..</h1>
 			<p class="lead" style="color:red;">${param.errorMessage}</p>
 		</div>
 
-		<form method="post" action="${pageContext.request.contextPath}/resetpassword">
+		<form method="post" action="${pageContext.request.contextPath}/changePassword">
 
 			<div>
-				<label for="oldPassword">Old Password:</label> <input type="password"
-					name="oldPassword" class="form-control" id="oldPassword">
+				<label for="emailId">Email Id:</label> <input
+					type="text" name="emailId" class="form-control" placeholder="${param.emailId}"
+					id="emailId" value="${param.emailId}" required>
 			</div>
-
 			<div>
 				<label for="newPassword">New Password:</label> <input
 					type="password" name="newPassword" class="form-control"
-					id="newPassword">
+					id="newPassword" required>
+					<span id='errorMsg'></span>
 			</div>
 			<div>
 				<label for="confirmNewPassword">Confirm New Password:</label> <input
 					type="password" name="confirmNewPassword" class="form-control"
-					id="confirmNewPassword" onkeyup='check();'>
+					id="confirmNewPassword" onchange='check();' required>
 				<span id='message'></span>
 			</div>
 			<br>
@@ -48,13 +49,14 @@ th, td {
 	<%@ include file="footer.jsp"%>
 	<script>
 		var check = function() {
-		  if (document.getElementById('newPassword').value !=
-		    document.getElementById('confirmNewPassword').value) {
-			  document.getElementById('message').style.color = 'red';
-			  document.getElementById('message').innerHTML = 'New password not matching';
-		  } else{
-			  document.getElementById('message').innerHTML = '';
-		  }
+
+			if (document.getElementById('newPassword').value != document
+					.getElementById('confirmNewPassword').value) {
+				document.getElementById('message').style.color = 'red';
+				document.getElementById('message').innerHTML = 'Entered Password is not matching!! Try Again';
+			} else {
+				document.getElementById('message').innerHTML = '';
+			}
 		}
 	</script>
 </body>

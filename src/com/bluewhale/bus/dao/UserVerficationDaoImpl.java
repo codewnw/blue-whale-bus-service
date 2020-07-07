@@ -15,6 +15,7 @@ public class UserVerficationDaoImpl implements UserVerficationDao {
 	private static final String EXISTS_QUERY = "SELECT * FROM USER WHERE USERNAME  = ?";
 	private static final String PASSWDUPDATE_QUERY = "UPDATE LOGIN SET PASSWORD = ? WHERE USERNAME = ?";
 	private static final String UPDATE_OTP_QUERY = "UPDATE OTP SET OTP=? WHERE USERNAME=?";
+	private static final String VERIFY_OLD_PASSWD_QUERY = "SELECT * FROM LOGIN WHERE USERNAME = ? AND PASSWORD=?";
 
 	@Override
 	public String create(String username) {
@@ -116,4 +117,18 @@ public class UserVerficationDaoImpl implements UserVerficationDao {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public boolean verifyOldPassword(String username, String oldPassword) {
+		try (Connection con = DbUtil.getCon(); PreparedStatement pstmt = con.prepareStatement(VERIFY_OLD_PASSWD_QUERY)) {
+			pstmt.setString(1, username);
+			pstmt.setString(2, oldPassword);
+			ResultSet rs = pstmt.executeQuery();
+			return rs.next();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 }

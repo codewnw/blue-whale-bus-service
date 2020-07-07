@@ -38,6 +38,6 @@
 <c:out value="No Bookings to display" />
 </c:if>
 <br><br>
-<button type=button name="back" onclick="history.back()">Go Back</button>
+<button type=button name="back" class="btn btn-primary" onclick="history.back()">Back</button>
 </main>
 <jsp:include page="footer.jsp" />

@@ -15,7 +15,7 @@
 			<div class="col-md-3 ">
 				<div class="list-group ">
 	              <a href="#" class="list-group-item list-group-item-action active">Dashboard</a>
-	              <a href="${pageContext.request.contextPath}/forgot" class="list-group-item list-group-item-action">Reset Password</a>
+	              <a href="${pageContext.request.contextPath}/reset-password.jsp" class="list-group-item list-group-item-action">Reset Password</a>
 	              <a href="#" class="list-group-item list-group-item-action">Comments</a>
 	              <a href="process-bookings-history.jsp" class="list-group-item list-group-item-action">BookingHistory</a>
 	              <a href="#" class="list-group-item list-group-item-action">Reports</a>
@@ -84,5 +84,6 @@
 		</div>
 	</div>
 	<jsp:include page="footer.jsp" />
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 </html>
