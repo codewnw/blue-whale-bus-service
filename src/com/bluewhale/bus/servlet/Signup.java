@@ -60,9 +60,14 @@ public class Signup extends HttpServlet {
 		user.setUsername(username);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
+
 		userService.create(user);
 
-		mailService.send(username);
+		Runnable runnable = () -> {
+			mailService.send(username);
+		};
+		Thread t = new Thread(runnable);
+		t.start();
 
 		Login login = new Login();
 		login.setUnsername(username);
