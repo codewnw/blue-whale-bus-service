@@ -63,18 +63,16 @@ public class Signup extends HttpServlet {
 
 		userService.create(user);
 
-		Runnable runnable = () -> {
-			mailService.send(username);
-		};
-		Thread t = new Thread(runnable);
-		t.start();
-
 		Login login = new Login();
+
 		login.setUnsername(username);
 		login.setPassword(new Password(password));
 		login.setType("Customer");
 		login.setStatus("Not Verified");
 		loginService.create(login);
+
+		// Async Email
+		new Thread(() -> mailService.send(username)).start();
 
 		response.sendRedirect("index.jsp");
 	}
