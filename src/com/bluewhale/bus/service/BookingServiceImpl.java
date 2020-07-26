@@ -12,7 +12,7 @@ public class BookingServiceImpl implements BookingService {
 		bookingDao=new BookingDaoImpl();
 	}
 
-	public boolean create(Booking booking, String username) {
-		return bookingDao.create(booking,username);
+	public boolean create(Booking booking) {
+		return bookingDao.create(booking);
 	}
 }

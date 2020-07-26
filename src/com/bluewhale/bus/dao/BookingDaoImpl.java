@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 
 import com.bluewhale.bus.exception.DAOException;
 import com.bluewhale.bus.model.Booking;
@@ -28,8 +29,6 @@ public class BookingDaoImpl implements BookingDao {
 			"PRIMARY KEY (booking_id))";
 	private static final String DROP_TABLE = "DROP TABLE Booking";
 	private static final String INSERT_QUERY = "INSERT INTO Booking VALUES (?, ?, ?,?, ?,?,?, ?,?,?,?)";
-	private static final String SQL_INSERT_NEW_seat_booking = "INSERT INTO Booking(booking_status, Bus_no, Seat_no, Price,"
-			+ " Payment_mode, username, Booking_date, From_Place, To_Place, Travel_Date) VALUES(?, ?, ? ,?, ?,?,?, ?,?,?)";
 	
 	@Override
 	public void createTable() {
@@ -71,7 +70,10 @@ public class BookingDaoImpl implements BookingDao {
 	}
 
 	@Override
-	public void create(Booking booking) {
+	public boolean create(Booking booking) {
+		boolean isBookingCreated=false;
+		booking.setBookingCreatedDate(java.sql.Date.valueOf(java.time.LocalDate.now()).toString());
+		booking.setBookingStatus("Confirmed");
 		try (Connection conn = DbUtil.getCon(); PreparedStatement pstmt = conn.prepareStatement(INSERT_QUERY);) {
 			pstmt.setLong(1, booking.getbId());
 			pstmt.setString(2, booking.getBookingStatus());
@@ -84,53 +86,18 @@ public class BookingDaoImpl implements BookingDao {
 			pstmt.setString(9, booking.getFromPlace());
 			pstmt.setString(10, booking.getToPlace());
 			pstmt.setDate(11, java.sql.Date.valueOf(booking.getTravelDate()));
-			pstmt.executeUpdate();
+			int affectedRows = pstmt.executeUpdate();
+			if (affectedRows == 0) {
+				System.out.println("Creating booking failed, no rows affected.");
+				booking.setBookingStatus("Not Confirmed");
+				//Need to update the booking table with the status
+			}else {
+				isBookingCreated= true;
+			}
+			return isBookingCreated;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return isBookingCreated;
 	}
-	
-	@Override
-	public boolean create(Booking booking, String username) {
-		booking.setBookingCreatedDate(java.sql.Date.valueOf(java.time.LocalDate.now()).toString());
-		Object[] values = { booking.getBookingStatus(), booking.getBusId(), booking.getSeatNo(),
-				booking.getBookingPrice(), booking.getPaymentMode(), username, booking.getBookingCreatedDate(),
-				booking.getFromPlace(), booking.getToPlace(), booking.getTravelDate() };
-		Connection connection;
-		try {
-			connection = DbUtil.getCon();
-			PreparedStatement statement = prepareStatement(connection, SQL_INSERT_NEW_seat_booking, true,
-					values);
-			int affectedRows = statement.executeUpdate();
-			if (affectedRows == 0) {
-				throw new DAOException("Creating booking failed, no rows affected.");
-			}
-
-			try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-				if (generatedKeys.next()) {
-					booking.setbId(generatedKeys.getInt(1));
-				} else {
-					throw new DAOException("Creating booking failed, no generated key obtained.");
-				}
-			}
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
-		return true;
-	}
-	
-	private static PreparedStatement prepareStatement(Connection connection, String sql, boolean returnGeneratedKeys,
-			Object... values) throws SQLException {
-		PreparedStatement statement = connection.prepareStatement(sql,
-				returnGeneratedKeys ? Statement.RETURN_GENERATED_KEYS : Statement.NO_GENERATED_KEYS);
-		setValues(statement, values);
-		return statement;
-	}
-
-	public static void setValues(PreparedStatement pstmt, Object... values) throws SQLException {
-		for (int i = 0; i < values.length; i++) {
-			pstmt.setObject(i + 1, values[i]);
-		}
-	}
-
 }

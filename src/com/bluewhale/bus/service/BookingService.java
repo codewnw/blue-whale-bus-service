@@ -4,5 +4,5 @@ import com.bluewhale.bus.model.Booking;
 
 public interface BookingService {
 
-	public boolean create(Booking booking, String username);
+	public boolean create(Booking booking);
 }

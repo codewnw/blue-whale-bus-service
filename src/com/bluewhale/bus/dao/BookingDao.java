@@ -5,7 +5,5 @@ import com.bluewhale.bus.model.User;
 
 public interface BookingDao extends BaseDao {
 
-	void create(Booking booking);
-	
-	boolean create(Booking booking, String username);
+	boolean create(Booking booking);
 }

@@ -11,6 +11,7 @@
 	<main role="main" class="container">
 		<div class="jumbotron">
 			<h4>${requestScope.resetPasswordSuccessfulMsg}</h4>
+			<p class="lead">${param.loginErrMessage}</p>
 		</div>
 		<form method="post" action="${pageContext.request.contextPath}/login">
 			<div class="form-group">
