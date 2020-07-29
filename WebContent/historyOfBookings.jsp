@@ -29,7 +29,7 @@
 				<td>${bookingHistory.busId}</td>
 				<td>${bookingHistory.seatNo}</td>
 				<td>${bookingHistory.bookingStatus}</td>
-				<td><a href="BookingDetails.jsp">${bookingHistory.bookingId} details</a></td>
+				<td><a href="${pageContext.request.contextPath}/bookingDetails.jsp">${bookingHistory.bookingId} details</a></td>
 			</tr>
 			</c:forEach>
 		</table>

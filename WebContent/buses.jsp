@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.time.*"%>
+<%@ page import="com.bluewhale.bus.model.Bus" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -148,12 +149,15 @@
 								class="btn btn-success btn-block">Offer</button></span>
 					</div>
 					<div align="center" style="margin: 1px">
+						<% Bus selectedBus=(Bus)pageContext.findAttribute("bus");
+						session.setAttribute("bus",selectedBus); %>
 						<span style="font-size: large;"><a type="button"
 							class="btn btn-primary btn-block zoom"
 							href="${pageContext.request.contextPath}/buses/${bus.id}/info">Book</a></span>
 					</div>
 				</div>
 			</div>
+			
 		</c:forEach>
 	</div>
 	<%@ include file="footer.jsp"%>

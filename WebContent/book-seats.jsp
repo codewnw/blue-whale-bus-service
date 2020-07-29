@@ -23,7 +23,7 @@ th, td {
 
 
 		<div class="container">
-			<form action="${pageContext.request.contextPath}/buses/temp"
+			<form action="${pageContext.request.contextPath}/buses/bookSeats"
 				method="post">
 
 				<table border=0>
@@ -75,10 +75,9 @@ th, td {
 							align="right" "width="400" height="350"></td>
 					</tr>
 				</table>
-
-				<div>
-					<input type="submit" class="btn btn-primary btn-block zoom"
-						height="50">
+				
+				<div class="text-right">
+				    <input type="submit" class="btn btn-primary">
 				</div>
 			</form>
 
