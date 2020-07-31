@@ -32,7 +32,7 @@ public class SeatBookingServlet extends HttpServlet {
 		HttpSession session=request.getSession(false);
 		String username=(String) session.getAttribute("username");
 		booking.setUserId(username);
-		boolean isSeatBooked=bookingService.create(booking,username);
+		boolean isSeatBooked=bookingService.create(booking);
 		if(isSeatBooked) {
 			request.setAttribute("bookSeat", booking);
 			RequestDispatcher rd = request.getRequestDispatcher("BookingDetails.jsp");
